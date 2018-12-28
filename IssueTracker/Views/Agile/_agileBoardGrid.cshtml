@@ -1,0 +1,233 @@
+﻿@using Newtonsoft.Json
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Agile";
+}
+
+@section StyleSection
+{
+    <!-- Essential Studio for JavaScript  theme reference -->
+    <link rel="stylesheet" href="http://cdn.syncfusion.com/16.4.0.42/js/web/flat-azure/ej.web.all.min.css" />
+    <link href="~/Styles/Bootstrap/bootstrap-multiselect.css" rel="stylesheet" />
+    <style>
+        h3 {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        #agile-board-list {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        label {
+            margin-right: 40px;
+        }
+
+        #edit-admin, #edit-project {
+            width: 200px;
+        }
+
+        .show {
+            display: inline-block !important;
+        }
+    </style>
+}
+
+@section ScriptSection{
+
+    <!-- Essential Studio for JavaScript  script references -->
+    <script src="http://cdn.syncfusion.com/js/assets/external/jquery.easing.1.3.min.js"> </script>
+    <script src="http://cdn.syncfusion.com/js/assets/external/jquery.globalize.min.js"></script>
+    <script src="http://cdn.syncfusion.com/16.4.0.42/js/web/ej.web.all.min.js"> </script>
+    <script src="https://cdn.syncfusion.com/scripts/components/essentialjs/Integrity/ej.dialog.all_15.min.js"></script>
+    <script src="~/Scripts/bootStrap-Multiselect.js"></script>
+    <script>
+        $(document).ready(function(){
+            var boardId;
+
+            $("#edit-dialog").ejDialog({ width: "630px", height: "350px", showHeader: false, draggable: false, enableResize: false, enableModal: true, closeOnEscape: false, "showOnInit": false });
+
+            $("#create-dialog").ejDialog({ width: "630px", height: "350px", showHeader: false, draggable: false, enableResize: false, enableModal: true, closeOnEscape: false, "showOnInit": false });
+
+            $('#edit-admin').multiselect({
+                buttonWidth : '200px',
+                includeSelectAllOption : true,
+                nonSelectedText: 'Select an Option'
+            });
+
+            $('#edit-project').multiselect({
+                buttonWidth : '200px',
+                includeSelectAllOption : true,
+                nonSelectedText: 'Select an Option'
+            });
+
+            $('#create-admin').multiselect({
+                buttonWidth : '200px',
+                includeSelectAllOption : true,
+                nonSelectedText: 'Select an Option'
+            });
+
+            $('#create-project').multiselect({
+                buttonWidth : '200px',
+                includeSelectAllOption : true,
+                nonSelectedText: 'Select an Option'
+            });
+        });
+
+        $(function() {
+            var data = @Html.Raw(JsonConvert.SerializeObject(ViewBag.AgileBoardListResult));
+            data = ej.DataManager(data);
+
+            $("#agileBoardgrid")
+               .ejGrid({
+                   dataSource: data,
+                   allowPaging: true,
+                   pageSettings: { pageSize: 15 },
+                   allowSelection: false,
+                   allowSorting: true,
+                   contextMenuSettings: { enableContextMenu: false },
+                   allowFiltering: true,
+                   filterSettings: { filterType: "excel" },
+                   allowResizing: true,
+                   allowEditing: false,
+                   allowScrolling: false,
+                   enableTouch: false,
+                   enableAltRow: true,
+                   load:window.GridToolTipBehavior,
+                   columns: [
+                       {
+                           headerText: "Name",
+                           field: "AgileBoardName",
+                           type: "string",
+                           textAlign: ej.TextAlign.Left,
+                           width: 150,
+                       },
+                       {
+                           headerText: "Admin",
+                           field: "Admin",
+                           type: "string",
+                           textAlign: ej.TextAlign.Left,
+                           width: 100,
+                       },
+                        {
+                            headerText: "Project",
+                            field: "ProjectName",
+                            type: "string",
+                            textAlign: ej.TextAlign.Left,
+                            width: 70,
+                        },
+                        {
+                            headerText: "Action",
+                            type: "string",
+                            textAlign: ej.TextAlign.Left,
+                            width: 70,
+                        },
+                   ],
+                   queryCellInfo: function (leadargs) {
+                       var $element = $(leadargs.cell);
+                       if (leadargs.column.headerText == "Name") {
+                           leadargs.cell.innerHTML = '<a target="_blank" href="/agile/' + leadargs.data.AgileBoardId  + '"> ' + leadargs.data.AgileBoardName + ' </a>'
+                       }
+                       if (leadargs.column.headerText == "Action") {
+                           leadargs.cell.innerHTML = '<a style="cursor:pointer" onclick = "EditDialogue('+ leadargs.data.AgileBoardId + ')"> Edit </a>'
+                       }
+                   }
+
+               });
+        });
+
+        function EditDialogue(agileBoardId, boardName){
+            boardId = agileBoardId;
+            $("#edit-dialog").ejDialog('open');
+
+            $("#edit-name").val(boardName);
+            $("#edit-dialog").removeClass("hide");
+        }
+
+        function CreateDialogue(){
+            $("#create-dialog").ejDialog('open');
+            $("#create-dialog").removeClass("hide");
+        }
+
+        function CloseDialog(){
+            $("#edit-dialog").ejDialog('close');
+            $("#edit-dialog").addClass("hide");
+            $("#create-dialog").ejDialog('close');
+            $("#create-dialog").addClass("hide");
+        }
+
+    </script>
+
+}
+
+@section MainSection
+{
+    <div id="agile-board-list">
+        <h3>
+            Agile Boards
+            <a style="cursor:pointer; float:right" class="btn btn-primary" onclick=CreateDialogue()> Create </a>
+        </h3>
+        <div id="agileBoardgrid"></div>
+
+
+        <div id="edit-dialog" class="hide">
+            <div class="close-icon" onclick="CloseDialog()"></div>
+            <h4 class="popupheading">EDIT BOARD</h4>
+            <hr />
+            <div id="message">
+                <div class="form-group">
+                    <label for="domain">Name*</label>
+                    <input type="text" class="form-control" id="edit-name" maxlength="100">
+                </div>
+                <div class="form-group">
+                    <label for="email">Admin*</label>
+                    @Html.DropDownList("edit-admin", IssueTracker.Models.TaskModel.GetAdminList() as SelectList, new { @class = "multiselect show-tick", data_selected_text_format = "count>1", id = "edit-admin", @NAME = "edit-admin", @multiple = true })
+                </div>
+                <div class="form-group">
+                    <label for="f-name">Project*</label>
+                    @Html.DropDownList("edit-project", IssueTracker.Models.TaskModel.GetProjectList() as SelectList, new { @class = "multiselect show-tick", data_selected_text_format = "count>1", id = "edit-project", @NAME = "edit-project", @multiple = true })
+
+                </div>
+            </div>
+            <div class="confirmButtons" style="float:right">
+                <button type="button" id="cancel-button" class="btn-primary btn submit-btn" onclick="CloseDialog()" style="margin-right: 20px;">CANCEL</button>
+                <button type="button" id="confirm-button" class="btn-primary btn submit-btn">EDIT</button>
+            </div>
+        </div>
+
+        <div id="create-dialog" class="hide">
+            <div class="close-icon" onclick="CloseDialog()"></div>
+            <h4 class="popupheading">CREATE BOARD</h4>
+            <hr />
+            <div id="message">
+                <div class="form-group">
+                    <label for="domain">Name*</label>
+                    <input type="text" class="form-control" id="domain" maxlength="100">
+                </div>
+                <div class="form-group">
+                    <label for="email">Admin*</label>
+                    @Html.DropDownList("create-admin", IssueTracker.Models.TaskModel.GetAdminList() as SelectList, new { @class = "multiselect show-tick", data_selected_text_format = "count>1", id = "create-admin", @NAME = "create-admin", @multiple = true })
+                </div>
+                <div class="form-group">
+                    <label for="f-name">Project*</label>
+                    @Html.DropDownList("create-project", IssueTracker.Models.TaskModel.GetProjectList() as SelectList, new { @class = "multiselect show-tick", data_selected_text_format = "count>1", id = "create-project", @NAME = "create-project", @multiple = true })
+
+                </div>
+            </div>
+            <div class="confirmButtons" style="float:right">
+                <button type="button" id="cancel-button" class="btn-primary btn submit-btn" onclick="CloseDialog()" style="margin-right: 20px;">CANCEL</button>
+                <button type="button" id="confirm-button" class="btn-primary btn submit-btn">CREATE</button>
+            </div>
+        </div>
+
+    </div>
+}
+
+
+
+

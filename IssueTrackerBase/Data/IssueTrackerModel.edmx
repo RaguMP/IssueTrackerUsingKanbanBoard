@@ -1,0 +1,2621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IssueTrackerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AgileBoard">
+          <Key>
+            <PropertyRef Name="AgileBoardId" />
+          </Key>
+          <Property Name="AgileBoardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgileBoardName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="SwimlanesBy" Type="int" />
+        </EntityType>
+        <EntityType Name="AgileBoardAdminMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgileBoardId" Type="int" Nullable="false" />
+          <Property Name="AdminUserId" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AgileBoardProjectMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgileBoardId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Components">
+          <Key>
+            <PropertyRef Name="ComponentId" />
+          </Key>
+          <Property Name="ComponentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComponentName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="LeadId" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomeFieldType">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomeFieldValueMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerFieldId" Type="int" Nullable="false" />
+          <Property Name="IntegerValue" Type="int" />
+          <Property Name="DeceimalValue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TextValue" Type="nvarchar" MaxLength="500" />
+          <Property Name="DateValue" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerFields">
+          <Key>
+            <PropertyRef Name="CustomFieldId" />
+          </Key>
+          <Property Name="CustomFieldId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerFieldName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EpicIssueMapper">
+          <Key>
+            <PropertyRef Name="EpicMapperId" />
+          </Key>
+          <Property Name="EpicMapperId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EpicIssueId" Type="int" Nullable="false" />
+          <Property Name="LinkedIssueId" Type="int" Nullable="false" />
+          <Property Name="LinkedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IssueDetails">
+          <Key>
+            <PropertyRef Name="IssueId" />
+          </Key>
+          <Property Name="IssueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskId" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ComponentId" Type="int" Nullable="false" />
+          <Property Name="IssueTypeId" Type="int" Nullable="false" />
+          <Property Name="PriorityId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="EngineerId" Type="int" Nullable="false" />
+          <Property Name="AssigneeId" Type="int" Nullable="false" />
+          <Property Name="ReportingPersionId" Type="int" Nullable="false" />
+          <Property Name="ReleaseVerionId" Type="int" />
+          <Property Name="StoryPoints" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="DueDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ResolutionId" Type="int" />
+          <Property Name="ClosedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IssuesCustomFieldValueMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="int" Nullable="false" />
+          <Property Name="IssueId" Type="int" Nullable="false" />
+          <Property Name="CustomFieldId" Type="int" Nullable="false" />
+          <Property Name="IntegerValue" Type="int" />
+          <Property Name="DeceimalValue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TextValue" Type="nvarchar" MaxLength="500" />
+          <Property Name="DateValue" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IssueTypes">
+          <Key>
+            <PropertyRef Name="IssueTypeId" />
+          </Key>
+          <Property Name="IssueTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IssueTypeName" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Priorities">
+          <Key>
+            <PropertyRef Name="PriorityId" />
+          </Key>
+          <Property Name="PriorityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PriorityName" Type="nvarchar" MaxLength="90" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectComponentMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="ComponentId" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectCustomFieldMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="CustomeFieldId" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectPermissionMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ProjectRoleId" Type="int" Nullable="false" />
+          <Property Name="ModifedBy" Type="int" Nullable="false" />
+          <Property Name="ModifedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectRoles">
+          <Key>
+            <PropertyRef Name="ProjectRoleId" />
+          </Key>
+          <Property Name="ProjectRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectRoleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectKey" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProjectLeadUserId" Type="int" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReleaseVersion">
+          <Key>
+            <PropertyRef Name="ReleaseVersionId" />
+          </Key>
+          <Property Name="ReleaseVersionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VersionName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="IsReleased" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ReleaseDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReleaseVersionProjectMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReleaseVersionId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Resolutions">
+          <Key>
+            <PropertyRef Name="ResolutionId" />
+          </Key>
+          <Property Name="ResolutionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResolutionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Workflows">
+          <Key>
+            <PropertyRef Name="WorkFlowId" />
+          </Key>
+          <Property Name="WorkFlowId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkFlowName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkFlowStatus">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkFlowId" Type="int" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkFlowTransactions">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkfFowMapperId" Type="int" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AgileBoardAdminMapper_AgileBoard_AgileBoardId">
+          <End Role="AgileBoard" Type="Self.AgileBoard" Multiplicity="1" />
+          <End Role="AgileBoardAdminMapper" Type="Self.AgileBoardAdminMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgileBoard">
+              <PropertyRef Name="AgileBoardId" />
+            </Principal>
+            <Dependent Role="AgileBoardAdminMapper">
+              <PropertyRef Name="AgileBoardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgileBoardAdminMapper_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AgileBoardAdminMapper" Type="Self.AgileBoardAdminMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AgileBoardAdminMapper">
+              <PropertyRef Name="AdminUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgileBoardProjectMapper_AgileBoardProjectMapper_AgileBoardId">
+          <End Role="AgileBoard" Type="Self.AgileBoard" Multiplicity="1" />
+          <End Role="AgileBoardProjectMapper" Type="Self.AgileBoardProjectMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgileBoard">
+              <PropertyRef Name="AgileBoardId" />
+            </Principal>
+            <Dependent Role="AgileBoardProjectMapper">
+              <PropertyRef Name="AgileBoardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgileBoardProjectMapper_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="AgileBoardProjectMapper" Type="Self.AgileBoardProjectMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="AgileBoardProjectMapper">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Components_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="Components" Type="Self.Components" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Components">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Components_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Components" Type="Self.Components" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Components">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Components_Users_CreatedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Components" Type="Self.Components" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Components">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Components_Users_LeadId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Components" Type="Self.Components" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Components">
+              <PropertyRef Name="LeadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomeFieldValueMapper_CustomerFields_CustomFieldId">
+          <End Role="CustomerFields" Type="Self.CustomerFields" Multiplicity="1" />
+          <End Role="CustomeFieldValueMapper" Type="Self.CustomeFieldValueMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerFields">
+              <PropertyRef Name="CustomFieldId" />
+            </Principal>
+            <Dependent Role="CustomeFieldValueMapper">
+              <PropertyRef Name="CustomerFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerFields_CustomeFieldType_TypeId">
+          <End Role="CustomeFieldType" Type="Self.CustomeFieldType" Multiplicity="1" />
+          <End Role="CustomerFields" Type="Self.CustomerFields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomeFieldType">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="CustomerFields">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EpicIssueMapper_IssueDetails_EpicIssueId">
+          <End Role="IssueDetails" Type="Self.IssueDetails" Multiplicity="1" />
+          <End Role="EpicIssueMapper" Type="Self.EpicIssueMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IssueDetails">
+              <PropertyRef Name="IssueId" />
+            </Principal>
+            <Dependent Role="EpicIssueMapper">
+              <PropertyRef Name="EpicIssueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EpicIssueMapper_IssueDetails_LinkedIssueId">
+          <End Role="IssueDetails" Type="Self.IssueDetails" Multiplicity="1" />
+          <End Role="EpicIssueMapper" Type="Self.EpicIssueMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IssueDetails">
+              <PropertyRef Name="IssueId" />
+            </Principal>
+            <Dependent Role="EpicIssueMapper">
+              <PropertyRef Name="LinkedIssueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EpicIssueMapper_Users_LinkedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="EpicIssueMapper" Type="Self.EpicIssueMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EpicIssueMapper">
+              <PropertyRef Name="LinkedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Components_ComponentId">
+          <End Role="Components" Type="Self.Components" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Components">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_IssueTypes_IssueTypeId">
+          <End Role="IssueTypes" Type="Self.IssueTypes" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IssueTypes">
+              <PropertyRef Name="IssueTypeId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="IssueTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Priorities_PriorityId">
+          <End Role="Priorities" Type="Self.Priorities" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Priorities">
+              <PropertyRef Name="PriorityId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="PriorityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_ReleaseVersion_ReleaseVersionId">
+          <End Role="ReleaseVersion" Type="Self.ReleaseVersion" Multiplicity="0..1" />
+          <End Role="IssueDetails" Type="Self.IssueDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReleaseVersion">
+              <PropertyRef Name="ReleaseVersionId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="ReleaseVerionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Resolutions_ResolutionId">
+          <End Role="Resolutions" Type="Self.Resolutions" Multiplicity="0..1" />
+          <End Role="IssueDetails" Type="Self.IssueDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resolutions">
+              <PropertyRef Name="ResolutionId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="ResolutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Statuses_StatusId">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Users_AssigneeId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="AssigneeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Users_CreatedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Users_EngineerId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="EngineerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Users_ModifiedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Users_ReportingPersionId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="ReportingPersionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssuesCustomFieldValueMapper_CustomerFields_CustomFieldId">
+          <End Role="CustomerFields" Type="Self.CustomerFields" Multiplicity="1" />
+          <End Role="IssuesCustomFieldValueMapper" Type="Self.IssuesCustomFieldValueMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerFields">
+              <PropertyRef Name="CustomFieldId" />
+            </Principal>
+            <Dependent Role="IssuesCustomFieldValueMapper">
+              <PropertyRef Name="CustomFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssuesCustomFieldValueMapper_IssueDetails_IssueId">
+          <End Role="IssueDetails" Type="Self.IssueDetails" Multiplicity="1" />
+          <End Role="IssuesCustomFieldValueMapper" Type="Self.IssuesCustomFieldValueMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IssueDetails">
+              <PropertyRef Name="IssueId" />
+            </Principal>
+            <Dependent Role="IssuesCustomFieldValueMapper">
+              <PropertyRef Name="IssueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectComponentMapper_Components_ComponentId">
+          <End Role="Components" Type="Self.Components" Multiplicity="1" />
+          <End Role="ProjectComponentMapper" Type="Self.ProjectComponentMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Components">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="ProjectComponentMapper">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectComponentMapper_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ProjectComponentMapper" Type="Self.ProjectComponentMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectComponentMapper">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectCustomFieldMapper_CustomerFields_CustomFieldId">
+          <End Role="CustomerFields" Type="Self.CustomerFields" Multiplicity="1" />
+          <End Role="ProjectCustomFieldMapper" Type="Self.ProjectCustomFieldMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerFields">
+              <PropertyRef Name="CustomFieldId" />
+            </Principal>
+            <Dependent Role="ProjectCustomFieldMapper">
+              <PropertyRef Name="CustomeFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectCustomFieldMapper_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ProjectCustomFieldMapper" Type="Self.ProjectCustomFieldMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectCustomFieldMapper">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectPermissionMapper_ProjectRoles_ProjectRoleId">
+          <End Role="ProjectRoles" Type="Self.ProjectRoles" Multiplicity="1" />
+          <End Role="ProjectPermissionMapper" Type="Self.ProjectPermissionMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectRoles">
+              <PropertyRef Name="ProjectRoleId" />
+            </Principal>
+            <Dependent Role="ProjectPermissionMapper">
+              <PropertyRef Name="ProjectRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectPermissionMapper_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ProjectPermissionMapper" Type="Self.ProjectPermissionMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectPermissionMapper">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectPermissionMapper_Users_ModifiedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ProjectPermissionMapper" Type="Self.ProjectPermissionMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectPermissionMapper">
+              <PropertyRef Name="ModifedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectPermissionMapper_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ProjectPermissionMapper" Type="Self.ProjectPermissionMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectPermissionMapper">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Users_CreatedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Users_ModifiedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Users_ProjectLeadUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ProjectLeadUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReleaseVersionProjectMapper_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ReleaseVersionProjectMapper" Type="Self.ReleaseVersionProjectMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ReleaseVersionProjectMapper">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReleaseVersionProjectMapper_ReleaseVersion_ReleaseVersionId">
+          <End Role="ReleaseVersion" Type="Self.ReleaseVersion" Multiplicity="1" />
+          <End Role="ReleaseVersionProjectMapper" Type="Self.ReleaseVersionProjectMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReleaseVersion">
+              <PropertyRef Name="ReleaseVersionId" />
+            </Principal>
+            <Dependent Role="ReleaseVersionProjectMapper">
+              <PropertyRef Name="ReleaseVersionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReleaseVersionProjectMapper_Users_CreatedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ReleaseVersionProjectMapper" Type="Self.ReleaseVersionProjectMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ReleaseVersionProjectMapper">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReleaseVersionProjectMapper_Users_ModifiedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ReleaseVersionProjectMapper" Type="Self.ReleaseVersionProjectMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ReleaseVersionProjectMapper">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserRole_RoleId">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workflows_Users_ModifiedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Workflows" Type="Self.Workflows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Workflows">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFlowStatus_Statuses_StatusId">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+          <End Role="WorkFlowStatus" Type="Self.WorkFlowStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="WorkFlowStatus">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFlowStatus_Workflows_WorkFlowId">
+          <End Role="Workflows" Type="Self.Workflows" Multiplicity="1" />
+          <End Role="WorkFlowStatus" Type="Self.WorkFlowStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="WorkFlowId" />
+            </Principal>
+            <Dependent Role="WorkFlowStatus">
+              <PropertyRef Name="WorkFlowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFlowTransactions_Statuses_StatusId">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+          <End Role="WorkFlowTransactions" Type="Self.WorkFlowTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="WorkFlowTransactions">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFlowTransactions_WorkFlowStatus_WorkFlowMapperId">
+          <End Role="WorkFlowStatus" Type="Self.WorkFlowStatus" Multiplicity="1" />
+          <End Role="WorkFlowTransactions" Type="Self.WorkFlowTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkFlowStatus">
+              <PropertyRef Name="MapperId" />
+            </Principal>
+            <Dependent Role="WorkFlowTransactions">
+              <PropertyRef Name="WorkfFowMapperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IssueTrackerModelStoreContainer">
+          <EntitySet Name="AgileBoard" EntityType="Self.AgileBoard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgileBoardAdminMapper" EntityType="Self.AgileBoardAdminMapper" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgileBoardProjectMapper" EntityType="Self.AgileBoardProjectMapper" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Components" EntityType="Self.Components" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomeFieldType" EntityType="Self.CustomeFieldType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomeFieldValueMapper" EntityType="Self.CustomeFieldValueMapper" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerFields" EntityType="Self.CustomerFields" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EpicIssueMapper" EntityType="Self.EpicIssueMapper" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IssueDetails" EntityType="Self.IssueDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IssuesCustomFieldValueMapper" EntityType="Self.IssuesCustomFieldValueMapper" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IssueTypes" EntityType="Self.IssueTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Priorities" EntityType="Self.Priorities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectComponentMapper" EntityType="Self.ProjectComponentMapper" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectCustomFieldMapper" EntityType="Self.ProjectCustomFieldMapper" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectPermissionMapper" EntityType="Self.ProjectPermissionMapper" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectRoles" EntityType="Self.ProjectRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReleaseVersion" EntityType="Self.ReleaseVersion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReleaseVersionProjectMapper" EntityType="Self.ReleaseVersionProjectMapper" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resolutions" EntityType="Self.Resolutions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workflows" EntityType="Self.Workflows" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkFlowStatus" EntityType="Self.WorkFlowStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkFlowTransactions" EntityType="Self.WorkFlowTransactions" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AgileBoardAdminMapper_AgileBoard_AgileBoardId" Association="Self.FK_AgileBoardAdminMapper_AgileBoard_AgileBoardId">
+            <End Role="AgileBoard" EntitySet="AgileBoard" />
+            <End Role="AgileBoardAdminMapper" EntitySet="AgileBoardAdminMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgileBoardAdminMapper_Users_UserId" Association="Self.FK_AgileBoardAdminMapper_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AgileBoardAdminMapper" EntitySet="AgileBoardAdminMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgileBoardProjectMapper_AgileBoardProjectMapper_AgileBoardId" Association="Self.FK_AgileBoardProjectMapper_AgileBoardProjectMapper_AgileBoardId">
+            <End Role="AgileBoard" EntitySet="AgileBoard" />
+            <End Role="AgileBoardProjectMapper" EntitySet="AgileBoardProjectMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgileBoardProjectMapper_Projects" Association="Self.FK_AgileBoardProjectMapper_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="AgileBoardProjectMapper" EntitySet="AgileBoardProjectMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Components_Projects_ProjectId" Association="Self.FK_Components_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Components_Users" Association="Self.FK_Components_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Components_Users_CreatedBy" Association="Self.FK_Components_Users_CreatedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Components_Users_LeadId" Association="Self.FK_Components_Users_LeadId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomeFieldValueMapper_CustomerFields_CustomFieldId" Association="Self.FK_CustomeFieldValueMapper_CustomerFields_CustomFieldId">
+            <End Role="CustomerFields" EntitySet="CustomerFields" />
+            <End Role="CustomeFieldValueMapper" EntitySet="CustomeFieldValueMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerFields_CustomeFieldType_TypeId" Association="Self.FK_CustomerFields_CustomeFieldType_TypeId">
+            <End Role="CustomeFieldType" EntitySet="CustomeFieldType" />
+            <End Role="CustomerFields" EntitySet="CustomerFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EpicIssueMapper_IssueDetails_EpicIssueId" Association="Self.FK_EpicIssueMapper_IssueDetails_EpicIssueId">
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+            <End Role="EpicIssueMapper" EntitySet="EpicIssueMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EpicIssueMapper_IssueDetails_LinkedIssueId" Association="Self.FK_EpicIssueMapper_IssueDetails_LinkedIssueId">
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+            <End Role="EpicIssueMapper" EntitySet="EpicIssueMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EpicIssueMapper_Users_LinkedBy" Association="Self.FK_EpicIssueMapper_Users_LinkedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EpicIssueMapper" EntitySet="EpicIssueMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Components_ComponentId" Association="Self.FK_IssueDetails_Components_ComponentId">
+            <End Role="Components" EntitySet="Components" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_IssueTypes_IssueTypeId" Association="Self.FK_IssueDetails_IssueTypes_IssueTypeId">
+            <End Role="IssueTypes" EntitySet="IssueTypes" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Priorities_PriorityId" Association="Self.FK_IssueDetails_Priorities_PriorityId">
+            <End Role="Priorities" EntitySet="Priorities" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_ReleaseVersion_ReleaseVersionId" Association="Self.FK_IssueDetails_ReleaseVersion_ReleaseVersionId">
+            <End Role="ReleaseVersion" EntitySet="ReleaseVersion" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Resolutions_ResolutionId" Association="Self.FK_IssueDetails_Resolutions_ResolutionId">
+            <End Role="Resolutions" EntitySet="Resolutions" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Statuses_StatusId" Association="Self.FK_IssueDetails_Statuses_StatusId">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Users_AssigneeId" Association="Self.FK_IssueDetails_Users_AssigneeId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Users_CreatedBy" Association="Self.FK_IssueDetails_Users_CreatedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Users_EngineerId" Association="Self.FK_IssueDetails_Users_EngineerId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Users_ModifiedBy" Association="Self.FK_IssueDetails_Users_ModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Users_ReportingPersionId" Association="Self.FK_IssueDetails_Users_ReportingPersionId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssuesCustomFieldValueMapper_CustomerFields_CustomFieldId" Association="Self.FK_IssuesCustomFieldValueMapper_CustomerFields_CustomFieldId">
+            <End Role="CustomerFields" EntitySet="CustomerFields" />
+            <End Role="IssuesCustomFieldValueMapper" EntitySet="IssuesCustomFieldValueMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssuesCustomFieldValueMapper_IssueDetails_IssueId" Association="Self.FK_IssuesCustomFieldValueMapper_IssueDetails_IssueId">
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+            <End Role="IssuesCustomFieldValueMapper" EntitySet="IssuesCustomFieldValueMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectComponentMapper_Components_ComponentId" Association="Self.FK_ProjectComponentMapper_Components_ComponentId">
+            <End Role="Components" EntitySet="Components" />
+            <End Role="ProjectComponentMapper" EntitySet="ProjectComponentMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectComponentMapper_Projects_ProjectId" Association="Self.FK_ProjectComponentMapper_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectComponentMapper" EntitySet="ProjectComponentMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectCustomFieldMapper_CustomerFields_CustomFieldId" Association="Self.FK_ProjectCustomFieldMapper_CustomerFields_CustomFieldId">
+            <End Role="CustomerFields" EntitySet="CustomerFields" />
+            <End Role="ProjectCustomFieldMapper" EntitySet="ProjectCustomFieldMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectCustomFieldMapper_Projects_ProjectId" Association="Self.FK_ProjectCustomFieldMapper_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectCustomFieldMapper" EntitySet="ProjectCustomFieldMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectPermissionMapper_ProjectRoles_ProjectRoleId" Association="Self.FK_ProjectPermissionMapper_ProjectRoles_ProjectRoleId">
+            <End Role="ProjectRoles" EntitySet="ProjectRoles" />
+            <End Role="ProjectPermissionMapper" EntitySet="ProjectPermissionMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectPermissionMapper_Projects_ProjectId" Association="Self.FK_ProjectPermissionMapper_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectPermissionMapper" EntitySet="ProjectPermissionMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectPermissionMapper_Users_ModifiedBy" Association="Self.FK_ProjectPermissionMapper_Users_ModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProjectPermissionMapper" EntitySet="ProjectPermissionMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectPermissionMapper_Users_UserId" Association="Self.FK_ProjectPermissionMapper_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProjectPermissionMapper" EntitySet="ProjectPermissionMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Users_CreatedBy" Association="Self.FK_Projects_Users_CreatedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Users_ModifiedBy" Association="Self.FK_Projects_Users_ModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Users_ProjectLeadUserId" Association="Self.FK_Projects_Users_ProjectLeadUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReleaseVersionProjectMapper_Projects_ProjectId" Association="Self.FK_ReleaseVersionProjectMapper_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ReleaseVersionProjectMapper" EntitySet="ReleaseVersionProjectMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReleaseVersionProjectMapper_ReleaseVersion_ReleaseVersionId" Association="Self.FK_ReleaseVersionProjectMapper_ReleaseVersion_ReleaseVersionId">
+            <End Role="ReleaseVersion" EntitySet="ReleaseVersion" />
+            <End Role="ReleaseVersionProjectMapper" EntitySet="ReleaseVersionProjectMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReleaseVersionProjectMapper_Users_CreatedBy" Association="Self.FK_ReleaseVersionProjectMapper_Users_CreatedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReleaseVersionProjectMapper" EntitySet="ReleaseVersionProjectMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReleaseVersionProjectMapper_Users_ModifiedBy" Association="Self.FK_ReleaseVersionProjectMapper_Users_ModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReleaseVersionProjectMapper" EntitySet="ReleaseVersionProjectMapper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserRole_RoleId" Association="Self.FK_Users_UserRole_RoleId">
+            <End Role="UserRole" EntitySet="UserRole" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workflows_Users_ModifiedBy" Association="Self.FK_Workflows_Users_ModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Workflows" EntitySet="Workflows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFlowStatus_Statuses_StatusId" Association="Self.FK_WorkFlowStatus_Statuses_StatusId">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="WorkFlowStatus" EntitySet="WorkFlowStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFlowStatus_Workflows_WorkFlowId" Association="Self.FK_WorkFlowStatus_Workflows_WorkFlowId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="WorkFlowStatus" EntitySet="WorkFlowStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFlowTransactions_Statuses_StatusId" Association="Self.FK_WorkFlowTransactions_Statuses_StatusId">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="WorkFlowTransactions" EntitySet="WorkFlowTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFlowTransactions_WorkFlowStatus_WorkFlowMapperId" Association="Self.FK_WorkFlowTransactions_WorkFlowStatus_WorkFlowMapperId">
+            <End Role="WorkFlowStatus" EntitySet="WorkFlowStatus" />
+            <End Role="WorkFlowTransactions" EntitySet="WorkFlowTransactions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IssueTrackerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AgileBoard">
+          <Key>
+            <PropertyRef Name="AgileBoardId" />
+          </Key>
+          <Property Name="AgileBoardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgileBoardName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AgileBoardAdminMappers" Relationship="Self.FK_AgileBoardAdminMapper_AgileBoard_AgileBoardId" FromRole="AgileBoard" ToRole="AgileBoardAdminMapper" />
+          <NavigationProperty Name="AgileBoardProjectMappers" Relationship="Self.FK_AgileBoardProjectMapper_AgileBoardProjectMapper_AgileBoardId" FromRole="AgileBoard" ToRole="AgileBoardProjectMapper" />
+          <Property Name="SwimlanesBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="AgileBoardAdminMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgileBoardId" Type="Int32" Nullable="false" />
+          <Property Name="AdminUserId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AgileBoard" Relationship="Self.FK_AgileBoardAdminMapper_AgileBoard_AgileBoardId" FromRole="AgileBoardAdminMapper" ToRole="AgileBoard" />
+          <NavigationProperty Name="User" Relationship="Self.FK_AgileBoardAdminMapper_Users_UserId" FromRole="AgileBoardAdminMapper" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="AgileBoardProjectMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgileBoardId" Type="Int32" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AgileBoard" Relationship="Self.FK_AgileBoardProjectMapper_AgileBoardProjectMapper_AgileBoardId" FromRole="AgileBoardProjectMapper" ToRole="AgileBoard" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_AgileBoardProjectMapper_Projects" FromRole="AgileBoardProjectMapper" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="Component">
+          <Key>
+            <PropertyRef Name="ComponentId" />
+          </Key>
+          <Property Name="ComponentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComponentName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="LeadId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Components_Projects_ProjectId" FromRole="Components" ToRole="Projects" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Components_Users" FromRole="Components" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Components_Users_CreatedBy" FromRole="Components" ToRole="Users" />
+          <NavigationProperty Name="User2" Relationship="Self.FK_Components_Users_LeadId" FromRole="Components" ToRole="Users" />
+          <NavigationProperty Name="IssueDetails" Relationship="Self.FK_IssueDetails_Components_ComponentId" FromRole="Components" ToRole="IssueDetails" />
+          <NavigationProperty Name="ProjectComponentMappers" Relationship="Self.FK_ProjectComponentMapper_Components_ComponentId" FromRole="Components" ToRole="ProjectComponentMapper" />
+        </EntityType>
+        <EntityType Name="CustomeFieldType">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CustomerFields" Relationship="Self.FK_CustomerFields_CustomeFieldType_TypeId" FromRole="CustomeFieldType" ToRole="CustomerFields" />
+        </EntityType>
+        <EntityType Name="CustomeFieldValueMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerFieldId" Type="Int32" Nullable="false" />
+          <Property Name="IntegerValue" Type="Int32" />
+          <Property Name="DeceimalValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TextValue" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DateValue" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CustomerField" Relationship="Self.FK_CustomeFieldValueMapper_CustomerFields_CustomFieldId" FromRole="CustomeFieldValueMapper" ToRole="CustomerFields" />
+        </EntityType>
+        <EntityType Name="CustomerField">
+          <Key>
+            <PropertyRef Name="CustomFieldId" />
+          </Key>
+          <Property Name="CustomFieldId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerFieldName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CustomeFieldType" Relationship="Self.FK_CustomerFields_CustomeFieldType_TypeId" FromRole="CustomerFields" ToRole="CustomeFieldType" />
+          <NavigationProperty Name="CustomeFieldValueMappers" Relationship="Self.FK_CustomeFieldValueMapper_CustomerFields_CustomFieldId" FromRole="CustomerFields" ToRole="CustomeFieldValueMapper" />
+          <NavigationProperty Name="IssuesCustomFieldValueMappers" Relationship="Self.FK_IssuesCustomFieldValueMapper_CustomerFields_CustomFieldId" FromRole="CustomerFields" ToRole="IssuesCustomFieldValueMapper" />
+          <NavigationProperty Name="ProjectCustomFieldMappers" Relationship="Self.FK_ProjectCustomFieldMapper_CustomerFields_CustomFieldId" FromRole="CustomerFields" ToRole="ProjectCustomFieldMapper" />
+        </EntityType>
+        <EntityType Name="EpicIssueMapper">
+          <Key>
+            <PropertyRef Name="EpicMapperId" />
+          </Key>
+          <Property Name="EpicMapperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EpicIssueId" Type="Int32" Nullable="false" />
+          <Property Name="LinkedIssueId" Type="Int32" Nullable="false" />
+          <Property Name="LinkedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="IssueDetail" Relationship="Self.FK_EpicIssueMapper_IssueDetails_EpicIssueId" FromRole="EpicIssueMapper" ToRole="IssueDetails" />
+          <NavigationProperty Name="IssueDetail1" Relationship="Self.FK_EpicIssueMapper_IssueDetails_LinkedIssueId" FromRole="EpicIssueMapper" ToRole="IssueDetails" />
+          <NavigationProperty Name="User" Relationship="Self.FK_EpicIssueMapper_Users_LinkedBy" FromRole="EpicIssueMapper" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="IssueDetail">
+          <Key>
+            <PropertyRef Name="IssueId" />
+          </Key>
+          <Property Name="IssueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ComponentId" Type="Int32" Nullable="false" />
+          <Property Name="IssueTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PriorityId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="EngineerId" Type="Int32" Nullable="false" />
+          <Property Name="AssigneeId" Type="Int32" Nullable="false" />
+          <Property Name="ReportingPersionId" Type="Int32" Nullable="false" />
+          <Property Name="ReleaseVerionId" Type="Int32" />
+          <Property Name="StoryPoints" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ResolutionId" Type="Int32" />
+          <Property Name="ClosedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Component" Relationship="Self.FK_IssueDetails_Components_ComponentId" FromRole="IssueDetails" ToRole="Components" />
+          <NavigationProperty Name="EpicIssueMappers" Relationship="Self.FK_EpicIssueMapper_IssueDetails_EpicIssueId" FromRole="IssueDetails" ToRole="EpicIssueMapper" />
+          <NavigationProperty Name="EpicIssueMappers1" Relationship="Self.FK_EpicIssueMapper_IssueDetails_LinkedIssueId" FromRole="IssueDetails" ToRole="EpicIssueMapper" />
+          <NavigationProperty Name="IssueType" Relationship="Self.FK_IssueDetails_IssueTypes_IssueTypeId" FromRole="IssueDetails" ToRole="IssueTypes" />
+          <NavigationProperty Name="Priority" Relationship="Self.FK_IssueDetails_Priorities_PriorityId" FromRole="IssueDetails" ToRole="Priorities" />
+          <NavigationProperty Name="ReleaseVersion" Relationship="Self.FK_IssueDetails_ReleaseVersion_ReleaseVersionId" FromRole="IssueDetails" ToRole="ReleaseVersion" />
+          <NavigationProperty Name="Resolution" Relationship="Self.FK_IssueDetails_Resolutions_ResolutionId" FromRole="IssueDetails" ToRole="Resolutions" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_IssueDetails_Statuses_StatusId" FromRole="IssueDetails" ToRole="Statuses" />
+          <NavigationProperty Name="User" Relationship="Self.FK_IssueDetails_Users_AssigneeId" FromRole="IssueDetails" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_IssueDetails_Users_CreatedBy" FromRole="IssueDetails" ToRole="Users" />
+          <NavigationProperty Name="User2" Relationship="Self.FK_IssueDetails_Users_EngineerId" FromRole="IssueDetails" ToRole="Users" />
+          <NavigationProperty Name="User3" Relationship="Self.FK_IssueDetails_Users_ModifiedBy" FromRole="IssueDetails" ToRole="Users" />
+          <NavigationProperty Name="User4" Relationship="Self.FK_IssueDetails_Users_ReportingPersionId" FromRole="IssueDetails" ToRole="Users" />
+          <NavigationProperty Name="IssuesCustomFieldValueMappers" Relationship="Self.FK_IssuesCustomFieldValueMapper_IssueDetails_IssueId" FromRole="IssueDetails" ToRole="IssuesCustomFieldValueMapper" />
+        </EntityType>
+        <EntityType Name="IssuesCustomFieldValueMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="Int32" Nullable="false" />
+          <Property Name="IssueId" Type="Int32" Nullable="false" />
+          <Property Name="CustomFieldId" Type="Int32" Nullable="false" />
+          <Property Name="IntegerValue" Type="Int32" />
+          <Property Name="DeceimalValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TextValue" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DateValue" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CustomerField" Relationship="Self.FK_IssuesCustomFieldValueMapper_CustomerFields_CustomFieldId" FromRole="IssuesCustomFieldValueMapper" ToRole="CustomerFields" />
+          <NavigationProperty Name="IssueDetail" Relationship="Self.FK_IssuesCustomFieldValueMapper_IssueDetails_IssueId" FromRole="IssuesCustomFieldValueMapper" ToRole="IssueDetails" />
+        </EntityType>
+        <EntityType Name="IssueType">
+          <Key>
+            <PropertyRef Name="IssueTypeId" />
+          </Key>
+          <Property Name="IssueTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IssueTypeName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="IssueDetails" Relationship="Self.FK_IssueDetails_IssueTypes_IssueTypeId" FromRole="IssueTypes" ToRole="IssueDetails" />
+        </EntityType>
+        <EntityType Name="Priority">
+          <Key>
+            <PropertyRef Name="PriorityId" />
+          </Key>
+          <Property Name="PriorityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PriorityName" Type="String" MaxLength="90" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="IssueDetails" Relationship="Self.FK_IssueDetails_Priorities_PriorityId" FromRole="Priorities" ToRole="IssueDetails" />
+        </EntityType>
+        <EntityType Name="ProjectComponentMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="ComponentId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Component" Relationship="Self.FK_ProjectComponentMapper_Components_ComponentId" FromRole="ProjectComponentMapper" ToRole="Components" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_ProjectComponentMapper_Projects_ProjectId" FromRole="ProjectComponentMapper" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="ProjectCustomFieldMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="CustomeFieldId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CustomerField" Relationship="Self.FK_ProjectCustomFieldMapper_CustomerFields_CustomFieldId" FromRole="ProjectCustomFieldMapper" ToRole="CustomerFields" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_ProjectCustomFieldMapper_Projects_ProjectId" FromRole="ProjectCustomFieldMapper" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="ProjectPermissionMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ProjectRoleId" Type="Int32" Nullable="false" />
+          <Property Name="ModifedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ProjectRole" Relationship="Self.FK_ProjectPermissionMapper_ProjectRoles_ProjectRoleId" FromRole="ProjectPermissionMapper" ToRole="ProjectRoles" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_ProjectPermissionMapper_Projects_ProjectId" FromRole="ProjectPermissionMapper" ToRole="Projects" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ProjectPermissionMapper_Users_ModifiedBy" FromRole="ProjectPermissionMapper" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_ProjectPermissionMapper_Users_UserId" FromRole="ProjectPermissionMapper" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ProjectRole">
+          <Key>
+            <PropertyRef Name="ProjectRoleId" />
+          </Key>
+          <Property Name="ProjectRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectRoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ProjectPermissionMappers" Relationship="Self.FK_ProjectPermissionMapper_ProjectRoles_ProjectRoleId" FromRole="ProjectRoles" ToRole="ProjectPermissionMapper" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectKey" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProjectName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProjectLeadUserId" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AgileBoardProjectMappers" Relationship="Self.FK_AgileBoardProjectMapper_Projects" FromRole="Projects" ToRole="AgileBoardProjectMapper" />
+          <NavigationProperty Name="Components" Relationship="Self.FK_Components_Projects_ProjectId" FromRole="Projects" ToRole="Components" />
+          <NavigationProperty Name="ProjectComponentMappers" Relationship="Self.FK_ProjectComponentMapper_Projects_ProjectId" FromRole="Projects" ToRole="ProjectComponentMapper" />
+          <NavigationProperty Name="ProjectCustomFieldMappers" Relationship="Self.FK_ProjectCustomFieldMapper_Projects_ProjectId" FromRole="Projects" ToRole="ProjectCustomFieldMapper" />
+          <NavigationProperty Name="ProjectPermissionMappers" Relationship="Self.FK_ProjectPermissionMapper_Projects_ProjectId" FromRole="Projects" ToRole="ProjectPermissionMapper" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Projects_Users_CreatedBy" FromRole="Projects" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Projects_Users_ModifiedBy" FromRole="Projects" ToRole="Users" />
+          <NavigationProperty Name="User2" Relationship="Self.FK_Projects_Users_ProjectLeadUserId" FromRole="Projects" ToRole="Users" />
+          <NavigationProperty Name="ReleaseVersionProjectMappers" Relationship="Self.FK_ReleaseVersionProjectMapper_Projects_ProjectId" FromRole="Projects" ToRole="ReleaseVersionProjectMapper" />
+        </EntityType>
+        <EntityType Name="ReleaseVersion">
+          <Key>
+            <PropertyRef Name="ReleaseVersionId" />
+          </Key>
+          <Property Name="ReleaseVersionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VersionName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="IsReleased" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReleaseDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="IssueDetails" Relationship="Self.FK_IssueDetails_ReleaseVersion_ReleaseVersionId" FromRole="ReleaseVersion" ToRole="IssueDetails" />
+          <NavigationProperty Name="ReleaseVersionProjectMappers" Relationship="Self.FK_ReleaseVersionProjectMapper_ReleaseVersion_ReleaseVersionId" FromRole="ReleaseVersion" ToRole="ReleaseVersionProjectMapper" />
+        </EntityType>
+        <EntityType Name="ReleaseVersionProjectMapper">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReleaseVersionId" Type="Int32" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_ReleaseVersionProjectMapper_Projects_ProjectId" FromRole="ReleaseVersionProjectMapper" ToRole="Projects" />
+          <NavigationProperty Name="ReleaseVersion" Relationship="Self.FK_ReleaseVersionProjectMapper_ReleaseVersion_ReleaseVersionId" FromRole="ReleaseVersionProjectMapper" ToRole="ReleaseVersion" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ReleaseVersionProjectMapper_Users_CreatedBy" FromRole="ReleaseVersionProjectMapper" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_ReleaseVersionProjectMapper_Users_ModifiedBy" FromRole="ReleaseVersionProjectMapper" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Resolution">
+          <Key>
+            <PropertyRef Name="ResolutionId" />
+          </Key>
+          <Property Name="ResolutionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResolutionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="IssueDetails" Relationship="Self.FK_IssueDetails_Resolutions_ResolutionId" FromRole="Resolutions" ToRole="IssueDetails" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="IssueDetails" Relationship="Self.FK_IssueDetails_Statuses_StatusId" FromRole="Statuses" ToRole="IssueDetails" />
+          <NavigationProperty Name="WorkFlowStatus" Relationship="Self.FK_WorkFlowStatus_Statuses_StatusId" FromRole="Statuses" ToRole="WorkFlowStatus" />
+          <NavigationProperty Name="WorkFlowTransactions" Relationship="Self.FK_WorkFlowTransactions_Statuses_StatusId" FromRole="Statuses" ToRole="WorkFlowTransactions" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_UserRole_RoleId" FromRole="UserRole" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AgileBoardAdminMappers" Relationship="Self.FK_AgileBoardAdminMapper_Users_UserId" FromRole="Users" ToRole="AgileBoardAdminMapper" />
+          <NavigationProperty Name="Components" Relationship="Self.FK_Components_Users" FromRole="Users" ToRole="Components" />
+          <NavigationProperty Name="Components1" Relationship="Self.FK_Components_Users_CreatedBy" FromRole="Users" ToRole="Components" />
+          <NavigationProperty Name="Components2" Relationship="Self.FK_Components_Users_LeadId" FromRole="Users" ToRole="Components" />
+          <NavigationProperty Name="EpicIssueMappers" Relationship="Self.FK_EpicIssueMapper_Users_LinkedBy" FromRole="Users" ToRole="EpicIssueMapper" />
+          <NavigationProperty Name="IssueDetails" Relationship="Self.FK_IssueDetails_Users_AssigneeId" FromRole="Users" ToRole="IssueDetails" />
+          <NavigationProperty Name="IssueDetails1" Relationship="Self.FK_IssueDetails_Users_CreatedBy" FromRole="Users" ToRole="IssueDetails" />
+          <NavigationProperty Name="IssueDetails2" Relationship="Self.FK_IssueDetails_Users_EngineerId" FromRole="Users" ToRole="IssueDetails" />
+          <NavigationProperty Name="IssueDetails3" Relationship="Self.FK_IssueDetails_Users_ModifiedBy" FromRole="Users" ToRole="IssueDetails" />
+          <NavigationProperty Name="IssueDetails4" Relationship="Self.FK_IssueDetails_Users_ReportingPersionId" FromRole="Users" ToRole="IssueDetails" />
+          <NavigationProperty Name="ProjectPermissionMappers" Relationship="Self.FK_ProjectPermissionMapper_Users_ModifiedBy" FromRole="Users" ToRole="ProjectPermissionMapper" />
+          <NavigationProperty Name="ProjectPermissionMappers1" Relationship="Self.FK_ProjectPermissionMapper_Users_UserId" FromRole="Users" ToRole="ProjectPermissionMapper" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Projects_Users_CreatedBy" FromRole="Users" ToRole="Projects" />
+          <NavigationProperty Name="Projects1" Relationship="Self.FK_Projects_Users_ModifiedBy" FromRole="Users" ToRole="Projects" />
+          <NavigationProperty Name="Projects2" Relationship="Self.FK_Projects_Users_ProjectLeadUserId" FromRole="Users" ToRole="Projects" />
+          <NavigationProperty Name="ReleaseVersionProjectMappers" Relationship="Self.FK_ReleaseVersionProjectMapper_Users_CreatedBy" FromRole="Users" ToRole="ReleaseVersionProjectMapper" />
+          <NavigationProperty Name="ReleaseVersionProjectMappers1" Relationship="Self.FK_ReleaseVersionProjectMapper_Users_ModifiedBy" FromRole="Users" ToRole="ReleaseVersionProjectMapper" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK_Users_UserRole_RoleId" FromRole="Users" ToRole="UserRole" />
+          <NavigationProperty Name="Workflows" Relationship="Self.FK_Workflows_Users_ModifiedBy" FromRole="Users" ToRole="Workflows" />
+        </EntityType>
+        <EntityType Name="Workflow">
+          <Key>
+            <PropertyRef Name="WorkFlowId" />
+          </Key>
+          <Property Name="WorkFlowId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkFlowName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Workflows_Users_ModifiedBy" FromRole="Workflows" ToRole="Users" />
+          <NavigationProperty Name="WorkFlowStatus" Relationship="Self.FK_WorkFlowStatus_Workflows_WorkFlowId" FromRole="Workflows" ToRole="WorkFlowStatus" />
+        </EntityType>
+        <EntityType Name="WorkFlowStatu">
+          <Key>
+            <PropertyRef Name="MapperId" />
+          </Key>
+          <Property Name="MapperId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkFlowId" Type="Int32" Nullable="false" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_WorkFlowStatus_Statuses_StatusId" FromRole="WorkFlowStatus" ToRole="Statuses" />
+          <NavigationProperty Name="Workflow" Relationship="Self.FK_WorkFlowStatus_Workflows_WorkFlowId" FromRole="WorkFlowStatus" ToRole="Workflows" />
+          <NavigationProperty Name="WorkFlowTransactions" Relationship="Self.FK_WorkFlowTransactions_WorkFlowStatus_WorkFlowMapperId" FromRole="WorkFlowStatus" ToRole="WorkFlowTransactions" />
+        </EntityType>
+        <EntityType Name="WorkFlowTransaction">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkfFowMapperId" Type="Int32" Nullable="false" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_WorkFlowTransactions_Statuses_StatusId" FromRole="WorkFlowTransactions" ToRole="Statuses" />
+          <NavigationProperty Name="WorkFlowStatu" Relationship="Self.FK_WorkFlowTransactions_WorkFlowStatus_WorkFlowMapperId" FromRole="WorkFlowTransactions" ToRole="WorkFlowStatus" />
+        </EntityType>
+        <Association Name="FK_AgileBoardAdminMapper_AgileBoard_AgileBoardId">
+          <End Role="AgileBoard" Type="Self.AgileBoard" Multiplicity="1" />
+          <End Role="AgileBoardAdminMapper" Type="Self.AgileBoardAdminMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgileBoard">
+              <PropertyRef Name="AgileBoardId" />
+            </Principal>
+            <Dependent Role="AgileBoardAdminMapper">
+              <PropertyRef Name="AgileBoardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgileBoardProjectMapper_AgileBoardProjectMapper_AgileBoardId">
+          <End Role="AgileBoard" Type="Self.AgileBoard" Multiplicity="1" />
+          <End Role="AgileBoardProjectMapper" Type="Self.AgileBoardProjectMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgileBoard">
+              <PropertyRef Name="AgileBoardId" />
+            </Principal>
+            <Dependent Role="AgileBoardProjectMapper">
+              <PropertyRef Name="AgileBoardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgileBoardAdminMapper_Users_UserId">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="AgileBoardAdminMapper" Type="Self.AgileBoardAdminMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AgileBoardAdminMapper">
+              <PropertyRef Name="AdminUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgileBoardProjectMapper_Projects">
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="AgileBoardProjectMapper" Type="Self.AgileBoardProjectMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="AgileBoardProjectMapper">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Components_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="Components" Type="Self.Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Components">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Components_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Components" Type="Self.Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Components">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Components_Users_CreatedBy">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Components" Type="Self.Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Components">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Components_Users_LeadId">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Components" Type="Self.Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Components">
+              <PropertyRef Name="LeadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Components_ComponentId">
+          <End Role="Components" Type="Self.Component" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Components">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectComponentMapper_Components_ComponentId">
+          <End Role="Components" Type="Self.Component" Multiplicity="1" />
+          <End Role="ProjectComponentMapper" Type="Self.ProjectComponentMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Components">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="ProjectComponentMapper">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerFields_CustomeFieldType_TypeId">
+          <End Role="CustomeFieldType" Type="Self.CustomeFieldType" Multiplicity="1" />
+          <End Role="CustomerFields" Type="Self.CustomerField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomeFieldType">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="CustomerFields">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomeFieldValueMapper_CustomerFields_CustomFieldId">
+          <End Role="CustomerFields" Type="Self.CustomerField" Multiplicity="1" />
+          <End Role="CustomeFieldValueMapper" Type="Self.CustomeFieldValueMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerFields">
+              <PropertyRef Name="CustomFieldId" />
+            </Principal>
+            <Dependent Role="CustomeFieldValueMapper">
+              <PropertyRef Name="CustomerFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssuesCustomFieldValueMapper_CustomerFields_CustomFieldId">
+          <End Role="CustomerFields" Type="Self.CustomerField" Multiplicity="1" />
+          <End Role="IssuesCustomFieldValueMapper" Type="Self.IssuesCustomFieldValueMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerFields">
+              <PropertyRef Name="CustomFieldId" />
+            </Principal>
+            <Dependent Role="IssuesCustomFieldValueMapper">
+              <PropertyRef Name="CustomFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectCustomFieldMapper_CustomerFields_CustomFieldId">
+          <End Role="CustomerFields" Type="Self.CustomerField" Multiplicity="1" />
+          <End Role="ProjectCustomFieldMapper" Type="Self.ProjectCustomFieldMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerFields">
+              <PropertyRef Name="CustomFieldId" />
+            </Principal>
+            <Dependent Role="ProjectCustomFieldMapper">
+              <PropertyRef Name="CustomeFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EpicIssueMapper_IssueDetails_EpicIssueId">
+          <End Role="IssueDetails" Type="Self.IssueDetail" Multiplicity="1" />
+          <End Role="EpicIssueMapper" Type="Self.EpicIssueMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IssueDetails">
+              <PropertyRef Name="IssueId" />
+            </Principal>
+            <Dependent Role="EpicIssueMapper">
+              <PropertyRef Name="EpicIssueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EpicIssueMapper_IssueDetails_LinkedIssueId">
+          <End Role="IssueDetails" Type="Self.IssueDetail" Multiplicity="1" />
+          <End Role="EpicIssueMapper" Type="Self.EpicIssueMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IssueDetails">
+              <PropertyRef Name="IssueId" />
+            </Principal>
+            <Dependent Role="EpicIssueMapper">
+              <PropertyRef Name="LinkedIssueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EpicIssueMapper_Users_LinkedBy">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="EpicIssueMapper" Type="Self.EpicIssueMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EpicIssueMapper">
+              <PropertyRef Name="LinkedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_IssueTypes_IssueTypeId">
+          <End Role="IssueTypes" Type="Self.IssueType" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IssueTypes">
+              <PropertyRef Name="IssueTypeId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="IssueTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Priorities_PriorityId">
+          <End Role="Priorities" Type="Self.Priority" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Priorities">
+              <PropertyRef Name="PriorityId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="PriorityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_ReleaseVersion_ReleaseVersionId">
+          <End Role="ReleaseVersion" Type="Self.ReleaseVersion" Multiplicity="0..1" />
+          <End Role="IssueDetails" Type="Self.IssueDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReleaseVersion">
+              <PropertyRef Name="ReleaseVersionId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="ReleaseVerionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Resolutions_ResolutionId">
+          <End Role="Resolutions" Type="Self.Resolution" Multiplicity="0..1" />
+          <End Role="IssueDetails" Type="Self.IssueDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resolutions">
+              <PropertyRef Name="ResolutionId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="ResolutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Statuses_StatusId">
+          <End Role="Statuses" Type="Self.Status" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Users_AssigneeId">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="AssigneeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Users_CreatedBy">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Users_EngineerId">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="EngineerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Users_ModifiedBy">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueDetails_Users_ReportingPersionId">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="IssueDetails" Type="Self.IssueDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="IssueDetails">
+              <PropertyRef Name="ReportingPersionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssuesCustomFieldValueMapper_IssueDetails_IssueId">
+          <End Role="IssueDetails" Type="Self.IssueDetail" Multiplicity="1" />
+          <End Role="IssuesCustomFieldValueMapper" Type="Self.IssuesCustomFieldValueMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IssueDetails">
+              <PropertyRef Name="IssueId" />
+            </Principal>
+            <Dependent Role="IssuesCustomFieldValueMapper">
+              <PropertyRef Name="IssueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectComponentMapper_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectComponentMapper" Type="Self.ProjectComponentMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectComponentMapper">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectCustomFieldMapper_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectCustomFieldMapper" Type="Self.ProjectCustomFieldMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectCustomFieldMapper">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectPermissionMapper_ProjectRoles_ProjectRoleId">
+          <End Role="ProjectRoles" Type="Self.ProjectRole" Multiplicity="1" />
+          <End Role="ProjectPermissionMapper" Type="Self.ProjectPermissionMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectRoles">
+              <PropertyRef Name="ProjectRoleId" />
+            </Principal>
+            <Dependent Role="ProjectPermissionMapper">
+              <PropertyRef Name="ProjectRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectPermissionMapper_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectPermissionMapper" Type="Self.ProjectPermissionMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectPermissionMapper">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectPermissionMapper_Users_ModifiedBy">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="ProjectPermissionMapper" Type="Self.ProjectPermissionMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectPermissionMapper">
+              <PropertyRef Name="ModifedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectPermissionMapper_Users_UserId">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="ProjectPermissionMapper" Type="Self.ProjectPermissionMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectPermissionMapper">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Users_CreatedBy">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Users_ModifiedBy">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Users_ProjectLeadUserId">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ProjectLeadUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReleaseVersionProjectMapper_Projects_ProjectId">
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="ReleaseVersionProjectMapper" Type="Self.ReleaseVersionProjectMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ReleaseVersionProjectMapper">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReleaseVersionProjectMapper_ReleaseVersion_ReleaseVersionId">
+          <End Role="ReleaseVersion" Type="Self.ReleaseVersion" Multiplicity="1" />
+          <End Role="ReleaseVersionProjectMapper" Type="Self.ReleaseVersionProjectMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReleaseVersion">
+              <PropertyRef Name="ReleaseVersionId" />
+            </Principal>
+            <Dependent Role="ReleaseVersionProjectMapper">
+              <PropertyRef Name="ReleaseVersionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReleaseVersionProjectMapper_Users_CreatedBy">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="ReleaseVersionProjectMapper" Type="Self.ReleaseVersionProjectMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ReleaseVersionProjectMapper">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReleaseVersionProjectMapper_Users_ModifiedBy">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="ReleaseVersionProjectMapper" Type="Self.ReleaseVersionProjectMapper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ReleaseVersionProjectMapper">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFlowStatus_Statuses_StatusId">
+          <End Role="Statuses" Type="Self.Status" Multiplicity="1" />
+          <End Role="WorkFlowStatus" Type="Self.WorkFlowStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="WorkFlowStatus">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFlowTransactions_Statuses_StatusId">
+          <End Role="Statuses" Type="Self.Status" Multiplicity="1" />
+          <End Role="WorkFlowTransactions" Type="Self.WorkFlowTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="WorkFlowTransactions">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserRole_RoleId">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workflows_Users_ModifiedBy">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Workflows" Type="Self.Workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Workflows">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFlowStatus_Workflows_WorkFlowId">
+          <End Role="Workflows" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="WorkFlowStatus" Type="Self.WorkFlowStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="WorkFlowId" />
+            </Principal>
+            <Dependent Role="WorkFlowStatus">
+              <PropertyRef Name="WorkFlowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkFlowTransactions_WorkFlowStatus_WorkFlowMapperId">
+          <End Role="WorkFlowStatus" Type="Self.WorkFlowStatu" Multiplicity="1" />
+          <End Role="WorkFlowTransactions" Type="Self.WorkFlowTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkFlowStatus">
+              <PropertyRef Name="MapperId" />
+            </Principal>
+            <Dependent Role="WorkFlowTransactions">
+              <PropertyRef Name="WorkfFowMapperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IssueTrackerEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AgileBoards" EntityType="Self.AgileBoard" />
+          <EntitySet Name="AgileBoardAdminMappers" EntityType="Self.AgileBoardAdminMapper" />
+          <EntitySet Name="AgileBoardProjectMappers" EntityType="Self.AgileBoardProjectMapper" />
+          <EntitySet Name="Components" EntityType="Self.Component" />
+          <EntitySet Name="CustomeFieldTypes" EntityType="Self.CustomeFieldType" />
+          <EntitySet Name="CustomeFieldValueMappers" EntityType="Self.CustomeFieldValueMapper" />
+          <EntitySet Name="CustomerFields" EntityType="Self.CustomerField" />
+          <EntitySet Name="EpicIssueMappers" EntityType="Self.EpicIssueMapper" />
+          <EntitySet Name="IssueDetails" EntityType="Self.IssueDetail" />
+          <EntitySet Name="IssuesCustomFieldValueMappers" EntityType="Self.IssuesCustomFieldValueMapper" />
+          <EntitySet Name="IssueTypes" EntityType="Self.IssueType" />
+          <EntitySet Name="Priorities" EntityType="Self.Priority" />
+          <EntitySet Name="ProjectComponentMappers" EntityType="Self.ProjectComponentMapper" />
+          <EntitySet Name="ProjectCustomFieldMappers" EntityType="Self.ProjectCustomFieldMapper" />
+          <EntitySet Name="ProjectPermissionMappers" EntityType="Self.ProjectPermissionMapper" />
+          <EntitySet Name="ProjectRoles" EntityType="Self.ProjectRole" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="ReleaseVersions" EntityType="Self.ReleaseVersion" />
+          <EntitySet Name="ReleaseVersionProjectMappers" EntityType="Self.ReleaseVersionProjectMapper" />
+          <EntitySet Name="Resolutions" EntityType="Self.Resolution" />
+          <EntitySet Name="Statuses" EntityType="Self.Status" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Workflows" EntityType="Self.Workflow" />
+          <EntitySet Name="WorkFlowStatus" EntityType="Self.WorkFlowStatu" />
+          <EntitySet Name="WorkFlowTransactions" EntityType="Self.WorkFlowTransaction" />
+          <AssociationSet Name="FK_AgileBoardAdminMapper_AgileBoard_AgileBoardId" Association="Self.FK_AgileBoardAdminMapper_AgileBoard_AgileBoardId">
+            <End Role="AgileBoard" EntitySet="AgileBoards" />
+            <End Role="AgileBoardAdminMapper" EntitySet="AgileBoardAdminMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgileBoardProjectMapper_AgileBoardProjectMapper_AgileBoardId" Association="Self.FK_AgileBoardProjectMapper_AgileBoardProjectMapper_AgileBoardId">
+            <End Role="AgileBoard" EntitySet="AgileBoards" />
+            <End Role="AgileBoardProjectMapper" EntitySet="AgileBoardProjectMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgileBoardAdminMapper_Users_UserId" Association="Self.FK_AgileBoardAdminMapper_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AgileBoardAdminMapper" EntitySet="AgileBoardAdminMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgileBoardProjectMapper_Projects" Association="Self.FK_AgileBoardProjectMapper_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="AgileBoardProjectMapper" EntitySet="AgileBoardProjectMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Components_Projects_ProjectId" Association="Self.FK_Components_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Components_Users" Association="Self.FK_Components_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Components_Users_CreatedBy" Association="Self.FK_Components_Users_CreatedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Components_Users_LeadId" Association="Self.FK_Components_Users_LeadId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Components_ComponentId" Association="Self.FK_IssueDetails_Components_ComponentId">
+            <End Role="Components" EntitySet="Components" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectComponentMapper_Components_ComponentId" Association="Self.FK_ProjectComponentMapper_Components_ComponentId">
+            <End Role="Components" EntitySet="Components" />
+            <End Role="ProjectComponentMapper" EntitySet="ProjectComponentMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerFields_CustomeFieldType_TypeId" Association="Self.FK_CustomerFields_CustomeFieldType_TypeId">
+            <End Role="CustomeFieldType" EntitySet="CustomeFieldTypes" />
+            <End Role="CustomerFields" EntitySet="CustomerFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomeFieldValueMapper_CustomerFields_CustomFieldId" Association="Self.FK_CustomeFieldValueMapper_CustomerFields_CustomFieldId">
+            <End Role="CustomerFields" EntitySet="CustomerFields" />
+            <End Role="CustomeFieldValueMapper" EntitySet="CustomeFieldValueMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssuesCustomFieldValueMapper_CustomerFields_CustomFieldId" Association="Self.FK_IssuesCustomFieldValueMapper_CustomerFields_CustomFieldId">
+            <End Role="CustomerFields" EntitySet="CustomerFields" />
+            <End Role="IssuesCustomFieldValueMapper" EntitySet="IssuesCustomFieldValueMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectCustomFieldMapper_CustomerFields_CustomFieldId" Association="Self.FK_ProjectCustomFieldMapper_CustomerFields_CustomFieldId">
+            <End Role="CustomerFields" EntitySet="CustomerFields" />
+            <End Role="ProjectCustomFieldMapper" EntitySet="ProjectCustomFieldMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EpicIssueMapper_IssueDetails_EpicIssueId" Association="Self.FK_EpicIssueMapper_IssueDetails_EpicIssueId">
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+            <End Role="EpicIssueMapper" EntitySet="EpicIssueMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EpicIssueMapper_IssueDetails_LinkedIssueId" Association="Self.FK_EpicIssueMapper_IssueDetails_LinkedIssueId">
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+            <End Role="EpicIssueMapper" EntitySet="EpicIssueMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EpicIssueMapper_Users_LinkedBy" Association="Self.FK_EpicIssueMapper_Users_LinkedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EpicIssueMapper" EntitySet="EpicIssueMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_IssueTypes_IssueTypeId" Association="Self.FK_IssueDetails_IssueTypes_IssueTypeId">
+            <End Role="IssueTypes" EntitySet="IssueTypes" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Priorities_PriorityId" Association="Self.FK_IssueDetails_Priorities_PriorityId">
+            <End Role="Priorities" EntitySet="Priorities" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_ReleaseVersion_ReleaseVersionId" Association="Self.FK_IssueDetails_ReleaseVersion_ReleaseVersionId">
+            <End Role="ReleaseVersion" EntitySet="ReleaseVersions" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Resolutions_ResolutionId" Association="Self.FK_IssueDetails_Resolutions_ResolutionId">
+            <End Role="Resolutions" EntitySet="Resolutions" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Statuses_StatusId" Association="Self.FK_IssueDetails_Statuses_StatusId">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Users_AssigneeId" Association="Self.FK_IssueDetails_Users_AssigneeId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Users_CreatedBy" Association="Self.FK_IssueDetails_Users_CreatedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Users_EngineerId" Association="Self.FK_IssueDetails_Users_EngineerId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Users_ModifiedBy" Association="Self.FK_IssueDetails_Users_ModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueDetails_Users_ReportingPersionId" Association="Self.FK_IssueDetails_Users_ReportingPersionId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssuesCustomFieldValueMapper_IssueDetails_IssueId" Association="Self.FK_IssuesCustomFieldValueMapper_IssueDetails_IssueId">
+            <End Role="IssueDetails" EntitySet="IssueDetails" />
+            <End Role="IssuesCustomFieldValueMapper" EntitySet="IssuesCustomFieldValueMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectComponentMapper_Projects_ProjectId" Association="Self.FK_ProjectComponentMapper_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectComponentMapper" EntitySet="ProjectComponentMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectCustomFieldMapper_Projects_ProjectId" Association="Self.FK_ProjectCustomFieldMapper_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectCustomFieldMapper" EntitySet="ProjectCustomFieldMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectPermissionMapper_ProjectRoles_ProjectRoleId" Association="Self.FK_ProjectPermissionMapper_ProjectRoles_ProjectRoleId">
+            <End Role="ProjectRoles" EntitySet="ProjectRoles" />
+            <End Role="ProjectPermissionMapper" EntitySet="ProjectPermissionMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectPermissionMapper_Projects_ProjectId" Association="Self.FK_ProjectPermissionMapper_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectPermissionMapper" EntitySet="ProjectPermissionMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectPermissionMapper_Users_ModifiedBy" Association="Self.FK_ProjectPermissionMapper_Users_ModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProjectPermissionMapper" EntitySet="ProjectPermissionMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectPermissionMapper_Users_UserId" Association="Self.FK_ProjectPermissionMapper_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProjectPermissionMapper" EntitySet="ProjectPermissionMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Users_CreatedBy" Association="Self.FK_Projects_Users_CreatedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Users_ModifiedBy" Association="Self.FK_Projects_Users_ModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Users_ProjectLeadUserId" Association="Self.FK_Projects_Users_ProjectLeadUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReleaseVersionProjectMapper_Projects_ProjectId" Association="Self.FK_ReleaseVersionProjectMapper_Projects_ProjectId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ReleaseVersionProjectMapper" EntitySet="ReleaseVersionProjectMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReleaseVersionProjectMapper_ReleaseVersion_ReleaseVersionId" Association="Self.FK_ReleaseVersionProjectMapper_ReleaseVersion_ReleaseVersionId">
+            <End Role="ReleaseVersion" EntitySet="ReleaseVersions" />
+            <End Role="ReleaseVersionProjectMapper" EntitySet="ReleaseVersionProjectMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReleaseVersionProjectMapper_Users_CreatedBy" Association="Self.FK_ReleaseVersionProjectMapper_Users_CreatedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReleaseVersionProjectMapper" EntitySet="ReleaseVersionProjectMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReleaseVersionProjectMapper_Users_ModifiedBy" Association="Self.FK_ReleaseVersionProjectMapper_Users_ModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReleaseVersionProjectMapper" EntitySet="ReleaseVersionProjectMappers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFlowStatus_Statuses_StatusId" Association="Self.FK_WorkFlowStatus_Statuses_StatusId">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="WorkFlowStatus" EntitySet="WorkFlowStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFlowTransactions_Statuses_StatusId" Association="Self.FK_WorkFlowTransactions_Statuses_StatusId">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="WorkFlowTransactions" EntitySet="WorkFlowTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserRole_RoleId" Association="Self.FK_Users_UserRole_RoleId">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workflows_Users_ModifiedBy" Association="Self.FK_Workflows_Users_ModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Workflows" EntitySet="Workflows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFlowStatus_Workflows_WorkFlowId" Association="Self.FK_WorkFlowStatus_Workflows_WorkFlowId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="WorkFlowStatus" EntitySet="WorkFlowStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFlowTransactions_WorkFlowStatus_WorkFlowMapperId" Association="Self.FK_WorkFlowTransactions_WorkFlowStatus_WorkFlowMapperId">
+            <End Role="WorkFlowStatus" EntitySet="WorkFlowStatus" />
+            <End Role="WorkFlowTransactions" EntitySet="WorkFlowTransactions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IssueTrackerModelStoreContainer" CdmEntityContainer="IssueTrackerEntities1">
+          <EntitySetMapping Name="AgileBoards">
+            <EntityTypeMapping TypeName="IssueTrackerModel.AgileBoard">
+              <MappingFragment StoreEntitySet="AgileBoard">
+                <ScalarProperty Name="SwimlanesBy" ColumnName="SwimlanesBy" />
+                <ScalarProperty Name="AgileBoardId" ColumnName="AgileBoardId" />
+                <ScalarProperty Name="AgileBoardName" ColumnName="AgileBoardName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgileBoardAdminMappers">
+            <EntityTypeMapping TypeName="IssueTrackerModel.AgileBoardAdminMapper">
+              <MappingFragment StoreEntitySet="AgileBoardAdminMapper">
+                <ScalarProperty Name="MapperId" ColumnName="MapperId" />
+                <ScalarProperty Name="AgileBoardId" ColumnName="AgileBoardId" />
+                <ScalarProperty Name="AdminUserId" ColumnName="AdminUserId" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgileBoardProjectMappers">
+            <EntityTypeMapping TypeName="IssueTrackerModel.AgileBoardProjectMapper">
+              <MappingFragment StoreEntitySet="AgileBoardProjectMapper">
+                <ScalarProperty Name="MapperId" ColumnName="MapperId" />
+                <ScalarProperty Name="AgileBoardId" ColumnName="AgileBoardId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Components">
+            <EntityTypeMapping TypeName="IssueTrackerModel.Component">
+              <MappingFragment StoreEntitySet="Components">
+                <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+                <ScalarProperty Name="ComponentName" ColumnName="ComponentName" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="LeadId" ColumnName="LeadId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomeFieldTypes">
+            <EntityTypeMapping TypeName="IssueTrackerModel.CustomeFieldType">
+              <MappingFragment StoreEntitySet="CustomeFieldType">
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomeFieldValueMappers">
+            <EntityTypeMapping TypeName="IssueTrackerModel.CustomeFieldValueMapper">
+              <MappingFragment StoreEntitySet="CustomeFieldValueMapper">
+                <ScalarProperty Name="MapperId" ColumnName="MapperId" />
+                <ScalarProperty Name="CustomerFieldId" ColumnName="CustomerFieldId" />
+                <ScalarProperty Name="IntegerValue" ColumnName="IntegerValue" />
+                <ScalarProperty Name="DeceimalValue" ColumnName="DeceimalValue" />
+                <ScalarProperty Name="TextValue" ColumnName="TextValue" />
+                <ScalarProperty Name="DateValue" ColumnName="DateValue" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerFields">
+            <EntityTypeMapping TypeName="IssueTrackerModel.CustomerField">
+              <MappingFragment StoreEntitySet="CustomerFields">
+                <ScalarProperty Name="CustomFieldId" ColumnName="CustomFieldId" />
+                <ScalarProperty Name="CustomerFieldName" ColumnName="CustomerFieldName" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EpicIssueMappers">
+            <EntityTypeMapping TypeName="IssueTrackerModel.EpicIssueMapper">
+              <MappingFragment StoreEntitySet="EpicIssueMapper">
+                <ScalarProperty Name="EpicMapperId" ColumnName="EpicMapperId" />
+                <ScalarProperty Name="EpicIssueId" ColumnName="EpicIssueId" />
+                <ScalarProperty Name="LinkedIssueId" ColumnName="LinkedIssueId" />
+                <ScalarProperty Name="LinkedBy" ColumnName="LinkedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IssueDetails">
+            <EntityTypeMapping TypeName="IssueTrackerModel.IssueDetail">
+              <MappingFragment StoreEntitySet="IssueDetails">
+                <ScalarProperty Name="IssueId" ColumnName="IssueId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+                <ScalarProperty Name="IssueTypeId" ColumnName="IssueTypeId" />
+                <ScalarProperty Name="PriorityId" ColumnName="PriorityId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="EngineerId" ColumnName="EngineerId" />
+                <ScalarProperty Name="AssigneeId" ColumnName="AssigneeId" />
+                <ScalarProperty Name="ReportingPersionId" ColumnName="ReportingPersionId" />
+                <ScalarProperty Name="ReleaseVerionId" ColumnName="ReleaseVerionId" />
+                <ScalarProperty Name="StoryPoints" ColumnName="StoryPoints" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ResolutionId" ColumnName="ResolutionId" />
+                <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IssuesCustomFieldValueMappers">
+            <EntityTypeMapping TypeName="IssueTrackerModel.IssuesCustomFieldValueMapper">
+              <MappingFragment StoreEntitySet="IssuesCustomFieldValueMapper">
+                <ScalarProperty Name="MapperId" ColumnName="MapperId" />
+                <ScalarProperty Name="IssueId" ColumnName="IssueId" />
+                <ScalarProperty Name="CustomFieldId" ColumnName="CustomFieldId" />
+                <ScalarProperty Name="IntegerValue" ColumnName="IntegerValue" />
+                <ScalarProperty Name="DeceimalValue" ColumnName="DeceimalValue" />
+                <ScalarProperty Name="TextValue" ColumnName="TextValue" />
+                <ScalarProperty Name="DateValue" ColumnName="DateValue" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IssueTypes">
+            <EntityTypeMapping TypeName="IssueTrackerModel.IssueType">
+              <MappingFragment StoreEntitySet="IssueTypes">
+                <ScalarProperty Name="IssueTypeId" ColumnName="IssueTypeId" />
+                <ScalarProperty Name="IssueTypeName" ColumnName="IssueTypeName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Priorities">
+            <EntityTypeMapping TypeName="IssueTrackerModel.Priority">
+              <MappingFragment StoreEntitySet="Priorities">
+                <ScalarProperty Name="PriorityId" ColumnName="PriorityId" />
+                <ScalarProperty Name="PriorityName" ColumnName="PriorityName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectComponentMappers">
+            <EntityTypeMapping TypeName="IssueTrackerModel.ProjectComponentMapper">
+              <MappingFragment StoreEntitySet="ProjectComponentMapper">
+                <ScalarProperty Name="MapperId" ColumnName="MapperId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectCustomFieldMappers">
+            <EntityTypeMapping TypeName="IssueTrackerModel.ProjectCustomFieldMapper">
+              <MappingFragment StoreEntitySet="ProjectCustomFieldMapper">
+                <ScalarProperty Name="MapperId" ColumnName="MapperId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CustomeFieldId" ColumnName="CustomeFieldId" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectPermissionMappers">
+            <EntityTypeMapping TypeName="IssueTrackerModel.ProjectPermissionMapper">
+              <MappingFragment StoreEntitySet="ProjectPermissionMapper">
+                <ScalarProperty Name="MapperId" ColumnName="MapperId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProjectRoleId" ColumnName="ProjectRoleId" />
+                <ScalarProperty Name="ModifedBy" ColumnName="ModifedBy" />
+                <ScalarProperty Name="ModifedDate" ColumnName="ModifedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectRoles">
+            <EntityTypeMapping TypeName="IssueTrackerModel.ProjectRole">
+              <MappingFragment StoreEntitySet="ProjectRoles">
+                <ScalarProperty Name="ProjectRoleId" ColumnName="ProjectRoleId" />
+                <ScalarProperty Name="ProjectRoleName" ColumnName="ProjectRoleName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="IssueTrackerModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ProjectKey" ColumnName="ProjectKey" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="ProjectLeadUserId" ColumnName="ProjectLeadUserId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReleaseVersions">
+            <EntityTypeMapping TypeName="IssueTrackerModel.ReleaseVersion">
+              <MappingFragment StoreEntitySet="ReleaseVersion">
+                <ScalarProperty Name="ReleaseVersionId" ColumnName="ReleaseVersionId" />
+                <ScalarProperty Name="VersionName" ColumnName="VersionName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="IsReleased" ColumnName="IsReleased" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReleaseVersionProjectMappers">
+            <EntityTypeMapping TypeName="IssueTrackerModel.ReleaseVersionProjectMapper">
+              <MappingFragment StoreEntitySet="ReleaseVersionProjectMapper">
+                <ScalarProperty Name="MapperId" ColumnName="MapperId" />
+                <ScalarProperty Name="ReleaseVersionId" ColumnName="ReleaseVersionId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resolutions">
+            <EntityTypeMapping TypeName="IssueTrackerModel.Resolution">
+              <MappingFragment StoreEntitySet="Resolutions">
+                <ScalarProperty Name="ResolutionId" ColumnName="ResolutionId" />
+                <ScalarProperty Name="ResolutionName" ColumnName="ResolutionName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statuses">
+            <EntityTypeMapping TypeName="IssueTrackerModel.Status">
+              <MappingFragment StoreEntitySet="Statuses">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="IssueTrackerModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="IssueTrackerModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workflows">
+            <EntityTypeMapping TypeName="IssueTrackerModel.Workflow">
+              <MappingFragment StoreEntitySet="Workflows">
+                <ScalarProperty Name="WorkFlowId" ColumnName="WorkFlowId" />
+                <ScalarProperty Name="WorkFlowName" ColumnName="WorkFlowName" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkFlowStatus">
+            <EntityTypeMapping TypeName="IssueTrackerModel.WorkFlowStatu">
+              <MappingFragment StoreEntitySet="WorkFlowStatus">
+                <ScalarProperty Name="MapperId" ColumnName="MapperId" />
+                <ScalarProperty Name="WorkFlowId" ColumnName="WorkFlowId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkFlowTransactions">
+            <EntityTypeMapping TypeName="IssueTrackerModel.WorkFlowTransaction">
+              <MappingFragment StoreEntitySet="WorkFlowTransactions">
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="WorkfFowMapperId" ColumnName="WorkfFowMapperId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

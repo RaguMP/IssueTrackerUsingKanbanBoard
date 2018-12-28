@@ -1,0 +1,147 @@
+
+.container-fluid {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+#task-overflow-banner .label{
+	width: 93px;
+    display: inline-block;
+    font-size: 14px;
+    padding: 6px 0px;
+}	
+
+.work-flow{
+	margin-top: 10px;
+}	
+
+.status-seg{
+	margin-right: 25px;	
+}
+
+#task-overflow-banner {
+	height: 165px;
+	background: linear-gradient(to right, rgba(37,17,68,1) 0%, rgba(45,20,66,1) 12%, rgba(42,19,67,1) 25%, rgba(140,59,42,1) 73%, rgba(220,92,22,1) 100%);
+	width: 100%;
+}
+
+#task-overflow-banner .work-log, #task-overflow-banner .no-log{
+	margin-top: 34px;
+    margin-left: 32%;
+}
+
+#task-overflow-banner .work-log h4, #task-overflow-banner .no-log h4{
+	display: inline-block;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+} 
+
+#task-overflow-banner .work-log .work-done, #task-overflow-banner .no-log .no-work{
+	display: inline-block;
+    width: 150px;
+    height: 20px;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-left: 15px;
+    margin-right: 5px;
+} 
+
+#task-overflow-banner .work-log .work-done{
+	background-color: green;
+}
+
+
+#task-overflow-banner .no-log .no-work{
+	background-color: #ccc;
+}
+
+#task-overflow-banner .work-log span, #task-overflow-banner .no-log span{
+	color: white;
+    font-weight: 700;
+} 
+
+.title-link{
+	margin-top: 20px;
+    display: inline-block;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#task-title{
+	font-weight: 600;
+    margin-bottom: 40px;
+}
+
+
+.task-buttons{
+	margin-bottom: 40px;
+}
+
+.task-buttons .btn-default{
+	margin-right: 15px;
+    font-weight: 600;
+}
+
+#task-detail{
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.detail-seg{
+	padding-left:0px;
+}
+
+.detail-seg table{
+	width: 290px;
+} 
+
+#user-seg table, #date-seg table{
+	width: 265px;
+} 
+
+.detail-seg table td{
+	padding: 10px 65px;
+    padding-left: 0px;
+} 
+
+#user-seg table td, #date-seg table td{
+	padding: 10px 10px;
+    padding-left: 0px;
+} 
+
+
+#user-seg, #date-seg{
+	background-color: #eee;
+    float: right;
+    padding: 20px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+#user-seg{
+	margin-bottom: 20px;
+}
+
+#description{
+	height: 150px;
+	border: 1px solid #ccc;
+	padding: 12px 12px;
+    border-radius: 5px;
+}
+
+.desc-seg h4{
+	font-weight: 600;
+    font-size: 16px;
+    margin-top: 45px;
+    margin-bottom: 25px;
+}
+
+.desc-seg{
+	margin-bottom: 50px;
+}
+
+
+
+
+

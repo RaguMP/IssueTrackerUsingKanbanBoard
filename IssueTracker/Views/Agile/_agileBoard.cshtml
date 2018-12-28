@@ -1,0 +1,94 @@
+﻿@using Newtonsoft.Json
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Agile";
+    var agileBoardId = ViewBag.AgileBoardId;
+    var agileBoardTitle = ViewBag.AgileBoardTile;
+    var swimlaneBy = ViewBag.SwimlaneBy;
+}
+
+@section StyleSection
+{
+    <!-- Essential Studio for JavaScript  theme reference -->
+    <link href="http://cdn.syncfusion.com/16.4.0.42/js/web/flat-azure/ej.web.all.min.css" rel="stylesheet" />
+
+    <style>
+        .e-kanban .e-columnrow .e-rowcell {
+            border-top: 0px !important;
+            border-bottom: 0px !important;
+        }
+
+        .e-kanban .e-collapsedrow .e-rowcell, .e-kanban .e-frozenrow .e-rowcell {
+            border-bottom: 0px !important;
+        }
+
+        .e-kanban .e-columnrow .e-rowcell {
+            height: auto !important;
+        }
+
+        .e-bottom-triangle {
+            border-bottom: 0px !important;
+            border-left: 0px !important;
+        }
+
+        .agile-header-row {
+            margin-bottom: 10px;
+            margin-right: 8px;
+            margin-top: 10px;
+        }
+    </style>
+}
+
+@section ScriptSection{
+    <!-- Essential Studio for JavaScript  script references -->
+    <script src="http://cdn.syncfusion.com/16.4.0.42/js/web/ej.web.all.min.js"></script>
+
+    <script>
+        var statusName = "Testing";
+        var SwimLaneColumn = "Assignee";
+        $(function () {
+            var dataManager = ej.DataManager(@Html.Raw(JsonConvert.SerializeObject(ViewBag.TaskListResult)));
+            $("#agileBoard").ejKanban({
+                dataSource: dataManager,
+                columns: [
+                    { headerText: "Open", key: "Open" },
+                    { headerText: "In Progress", key: "In Progress" },
+                    { headerText: "Done", key: "Close" },
+                ],
+                fields: {
+                    content: "Title",
+                    swimlaneKey: SwimLaneColumn,
+                    primaryKey: "IssueId",
+                    tag: "StoryPoint"
+                },
+                keyField: "Status"
+            });
+        });
+
+        $(function () {
+            $("#btn-agileBoardSetting").ejButton({
+                contentType: "imageonly",
+                prefixIcon: "e-icon e-settings",
+                click: function (args) {
+                    window.location.href = '/agile/' +@agileBoardId +'/settings';
+                }
+            });            
+});
+    </script>
+}
+
+@section MainSection
+{
+    <div class="row agile-header-row">
+        <div id="agileBoardName" class="col-lg-11">
+            <span style="font-size:24px;">@agileBoardTitle</span>
+        </div>
+        <div id="btn-agileBoardSetting" style="float:right"></div>
+    </div>
+
+    <div id="agileBoard"></div>
+}
+
+
+
+

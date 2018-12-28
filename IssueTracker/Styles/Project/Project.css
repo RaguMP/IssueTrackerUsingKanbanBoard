@@ -1,0 +1,26 @@
+﻿#heading {
+    margin-top:30px;
+    text-align: center;
+}
+
+#btn-add {
+margin-left:90%;
+padding-left:30px;
+padding-right:30px;
+}
+
+#SubmitProject{
+  margin-left: 40%;
+  padding-bottom: 20px;
+ 
+}
+#SubmitProject #btn-close {
+    margin-left: 40px;
+}
+.modal-dialog .modal .modal-content{
+    width:60%;
+}
+
+#createProject{
+    width:50%;
+}

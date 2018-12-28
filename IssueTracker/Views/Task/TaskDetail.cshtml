@@ -1,0 +1,167 @@
+﻿@model IssueTracker.Models.TaskDetails
+
+@{
+    ViewBag.Title = "Task Detail";
+    Layout = "~/Views/Shared/_LayoutWithSubMenu.cshtml";
+    string taskId = ViewBag.TaskId;
+}
+
+@section StyleSection
+{
+<link href="~/Styles/Task/TaskDetail.css" rel="stylesheet" />
+}
+
+@section ScriptSection{
+    <script>
+        $("#comment-btn").on("click", function () {
+            $('html, body').animate({
+                scrollTop: $("#comment-section").offset().top
+            }, 1000);
+        });
+    </script>
+}
+
+@section MainSection
+{   
+    <div id="task-detail">
+        <a href="/task/@taskId" class="title-link">@taskId</a>
+        <h2 id="task-title">@Model.Title</h2>
+        <div class="task-buttons">
+            <a class="btn btn-default" id="edit-btn">EDIT</a>
+            <a class="btn btn-default" id="comment-btn">COMMENT</a>
+            <a class="btn btn-default" id="log-work-btn">LOG WORK</a>
+            <a class="btn btn-default">IN PROGRESS</a>
+            <a class="btn btn-default">CLOSED</a>
+        </div>
+        <div class="col-lg-6 detail-seg">
+            <table>
+                <tr>
+                    <td>
+                        Type:
+                    </td>
+                    <td>
+                        @Model.IssueTypeName
+                    </td>
+                    <td>
+                        Status:
+                    </td>
+                    <td>
+                        @Model.StatusName
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Components:
+                    </td>
+                    <td>
+                        <a>@Model.ComponentName</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Priority:
+                    </td>
+                    <td>
+                        @Model.PriorityName
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        Story Point:
+                    </td>
+                    <td>
+                        @Model.StoryPoints
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Release Version:
+                    </td>
+                    <td>
+                        @Model.ReleaseVersionName
+                    </td>
+                </tr>
+            </table>
+
+            <div class="desc-seg">
+                <h4>Description</h4>
+                <div id="description">
+                   @Model.Description
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 assignee-seg">
+            <div id="user-seg">
+                <table>
+                    <tr>
+                        <td>
+                            Assignee:
+                        </td>
+                        <td>
+                            @Model.AssigneeName
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Reporter:
+                        </td>
+                        <td>
+                            @Model.ReporterName
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Engineer:
+                        </td>
+                        <td>
+                            @Model.EngineerName
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="date-seg">
+                <table>
+                    <tr>
+                        <td>
+                            Due Date:
+                        </td>
+                        <td>
+                            @Model.DueDate.ToShortDateString()
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Created Date:
+                        </td>
+                        <td>
+                            @Model.CreatedDate
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Updated Date:
+                        </td>
+                        <td>
+                            @Model.ModifiedDate
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+        <div id="comment-section" class="col-lg-12" style="margin-bottom: 50px;">
+            <h4 style="margin-bottom: 25px;">Add Comment</h4>
+            <textarea rows="10" cols="100" placeholder="Please enter a comment">
+                
+            </textarea>
+            <button class="btn btn-primary" style="display: block; margin-top: 20px;">Comment</button>
+        </div>
+
+    </div>
+}
+
+

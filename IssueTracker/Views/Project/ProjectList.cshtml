@@ -1,0 +1,133 @@
+﻿@model IssueTracker.Models.Project.projectform
+@using Newtonsoft.Json
+@{
+    ViewBag.Title = "Create Project";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Dinesh Muralitharan",
+        Value = "2",
+          Selected = true
+    });
+   
+   
+}
+
+
+@section StyleSection
+{
+   <link href="~/Styles/Project/Project.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdn.syncfusion.com/16.4.0.42/js/web/flat-azure/ej.web.all.min.css" />
+}
+
+@section ScriptSection{
+
+<script src="http://cdn.syncfusion.com/js/assets/external/jquery.easing.1.3.min.js"> </script>
+<script src="http://cdn.syncfusion.com/js/assets/external/jquery.globalize.min.js"></script>
+<script src="http://cdn.syncfusion.com/16.4.0.42/js/web/ej.web.all.min.js"> </script>
+
+<script>
+    $(function() {
+        var data = @Html.Raw(JsonConvert.SerializeObject(ViewBag.AgileBoardListResult));
+        data = ej.DataManager(data);
+
+        $("#projectDetailsGrid")
+           .ejGrid({
+               dataSource: data,
+               allowPaging: true,
+               pageSettings: { pageSize: 15 },
+               allowSelection: false,
+               allowSorting: true,
+               contextMenuSettings: { enableContextMenu: false },
+               allowFiltering: true,
+               filterSettings: { filterType: "excel" },
+               allowResizing: true,
+               allowEditing: false,
+               allowScrolling: false,
+               enableTouch: false,
+               enableAltRow: true,
+               load:window.GridToolTipBehavior,
+
+
+               columns: [
+        { field: "Projectkey", isPrimaryKey: true, headerText: "TaskId", textAlign: ej.TextAlign.Left, visible: false },
+        { field: "Projectkey", headerText: "TaskIdName", textAlign: ej.TextAlign.Left},
+        { field: "ProjectName", headerText: "ProjectName", textAlign: ej.TextAlign.Left},
+       { field: "ProjectLead", headerText: "ProjectLead", textAlign: ej.TextAlign.Left},
+
+               ],
+           });
+    });
+</script>
+
+
+}
+
+@section MainSection
+{
+   <div class="container">
+    <div>
+        <h3 id="heading" style="text-align:left">Project List</h3>
+        <button type="button" class="btn btn-success" id="btn-add" data-toggle="modal" data-target="#AddProject">Add</button>
+        <!-- Modal -->
+
+        <div class="modal fade" id="AddProject" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Project</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+@using (Html.BeginForm("Create", "Project", FormMethod.Post, new { @id = "projectFormId", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Projectkey, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Projectkey, new { htmlAttributes = new { @class = "form-control" ,@id= "Projectkey" } })
+                    @Html.ValidationMessageFor(model => model.Projectkey, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control" , @id = "Projectkey" } })
+                    @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProjectLead, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.DropDownListFor(model => model.ProjectLeadId, listItems,  "Select ProjectLeader", new { @class = "form-control", id = "Projectkey" })
+                   </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+         }
+
+    </div>
+            </div>
+        </div>
+        <div id="grid">
+            <br />
+            <div id="projectDetailsGrid"></div>
+        </div>
+    </div>
+       }
+
+
+

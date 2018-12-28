@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Agile Board Settings";
+    var agileBoardId = ViewBag.AgileBoardId;
+    var settingType = ViewBag.ConfigType;
+    Layout = "~/Views/Shared/_LayoutForAgileSettings.cshtml";
+}
+
+@section StyleSection
+{
+    <!-- Essential Studio for JavaScript  theme reference -->
+    <link href="http://cdn.syncfusion.com/16.4.0.42/js/web/flat-azure/ej.web.all.min.css" rel="stylesheet" />
+
+    <style>
+        .agile-header-row {
+            margin-bottom: 10px;
+            margin-right: 8px;
+            margin-top: 10px;
+        }
+    </style>
+}
+
+@section ScriptSection{
+    <!-- Essential Studio for JavaScript  script references -->
+    <script src="http://cdn.syncfusion.com/16.4.0.42/js/web/ej.web.all.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#btn-backToAgileBoard").ejButton({
+                text: "Back To Board",
+                click: function (args) {
+                    window.location.href = '/agile/'+@agileBoardId;
+                }
+            });
+        });
+
+        $(function () {
+            var swimlaneList = [
+                { id: 6, text: "None", value:"None" },{ id: 1, text: "Assginee",value:"Assginee" }, { id: 2, text: "Engineer" ,value:"Engineer"}, { id: 3, text: "Issue Type",value:"IssueType" },
+                { id: 4, text: "Project Name",value:"ProjectName" }, { id: 5, text: "Story Point",value:"StoryPoint" }
+            ];
+            $('#swimlanesDropDown').ejDropDownList({
+                dataSource: swimlaneList,
+                width: "100%",
+                value:"Assginee",
+                watermarkText: "Select a Swimlane",
+                fields: { id: "empid", text: "text", value: "value" }
+            });
+        });
+
+
+    </script>
+}
+
+@section MainSection
+{
+    <div class="row agile-header-row">
+        <div class="col-lg-10">
+            <span style="font-size:24px;">Settings</span>
+        </div>
+        <div id="btn-backToAgileBoard" style="float:right"></div>
+    </div>
+
+    @if (string.IsNullOrEmpty(settingType) || (!string.IsNullOrEmpty(settingType) && settingType == "swimlanes"))
+    {
+        <div>
+            A swimlane is a row on the board that can be used to group issues. Swimlane type can be changed below and will be saved automatically.
+        </div>
+        <div style="margin-top:10px;">
+            <span>Swimlanes on</span>
+            <div style="width:300px;">
+                <input type="text" id="swimlanesDropDown" />
+            </div>
+
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(settingType) && settingType == "cardcolors")
+    {
+    }
+    @if (!string.IsNullOrEmpty(settingType) && settingType == "cardlayout")
+    {
+    }
+}
+
+

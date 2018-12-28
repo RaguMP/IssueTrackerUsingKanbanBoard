@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6c1fcbd385c3430c9429ffc01e353e32" Name="Diagram1">
+        <EntityTypeShape EntityType="IssueTrackerModel.AgileBoard" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.AgileBoardAdminMapper" Width="1.5" PointX="5.25" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.AgileBoardProjectMapper" Width="1.5" PointX="7.5" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.Component" Width="1.5" PointX="7.5" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.CustomeFieldType" Width="1.5" PointX="13.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.CustomeFieldValueMapper" Width="1.5" PointX="18" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.CustomerField" Width="1.5" PointX="15.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.EpicIssueMapper" Width="1.5" PointX="15" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.IssueDetail" Width="1.5" PointX="12.75" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.IssuesCustomFieldValueMapper" Width="1.5" PointX="18" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.IssueType" Width="1.5" PointX="10.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.Priority" Width="1.5" PointX="10.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.ProjectComponentMapper" Width="1.5" PointX="12.75" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.ProjectCustomFieldMapper" Width="1.5" PointX="10.5" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.ProjectPermissionMapper" Width="1.5" PointX="10.5" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.ProjectRole" Width="1.5" PointX="8.25" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.Project" Width="1.5" PointX="5.25" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.ReleaseVersion" Width="1.5" PointX="10.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.ReleaseVersionProjectMapper" Width="1.5" PointX="10.5" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.Resolution" Width="1.5" PointX="10.5" PointY="35.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.Status" Width="1.5" PointX="10.5" PointY="37.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.UserRole" Width="1.5" PointX="0.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.User" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.Workflow" Width="1.5" PointX="5.25" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.WorkFlowStatu" Width="1.5" PointX="7.5" PointY="31.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IssueTrackerModel.WorkFlowTransaction" Width="1.5" PointX="9.75" PointY="31.25" IsExpanded="true" />
+        <AssociationConnector Association="IssueTrackerModel.FK_AgileBoardAdminMapper_AgileBoard_AgileBoardId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_AgileBoardProjectMapper_AgileBoardProjectMapper_AgileBoardId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_AgileBoardAdminMapper_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_AgileBoardProjectMapper_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_Components_Projects_ProjectId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_Components_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_Components_Users_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_Components_Users_LeadId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_IssueDetails_Components_ComponentId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_ProjectComponentMapper_Components_ComponentId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_CustomerFields_CustomeFieldType_TypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_CustomeFieldValueMapper_CustomerFields_CustomFieldId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_IssuesCustomFieldValueMapper_CustomerFields_CustomFieldId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_ProjectCustomFieldMapper_CustomerFields_CustomFieldId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_EpicIssueMapper_IssueDetails_EpicIssueId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_EpicIssueMapper_IssueDetails_LinkedIssueId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_EpicIssueMapper_Users_LinkedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_IssueDetails_IssueTypes_IssueTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_IssueDetails_Priorities_PriorityId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_IssueDetails_ReleaseVersion_ReleaseVersionId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_IssueDetails_Resolutions_ResolutionId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_IssueDetails_Statuses_StatusId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_IssueDetails_Users_AssigneeId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_IssueDetails_Users_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_IssueDetails_Users_EngineerId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_IssueDetails_Users_ModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_IssueDetails_Users_ReportingPersionId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_IssuesCustomFieldValueMapper_IssueDetails_IssueId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_ProjectComponentMapper_Projects_ProjectId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_ProjectCustomFieldMapper_Projects_ProjectId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_ProjectPermissionMapper_ProjectRoles_ProjectRoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_ProjectPermissionMapper_Projects_ProjectId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_ProjectPermissionMapper_Users_ModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_ProjectPermissionMapper_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_Projects_Users_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_Projects_Users_ModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_Projects_Users_ProjectLeadUserId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_ReleaseVersionProjectMapper_Projects_ProjectId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_ReleaseVersionProjectMapper_ReleaseVersion_ReleaseVersionId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_ReleaseVersionProjectMapper_Users_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_ReleaseVersionProjectMapper_Users_ModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_WorkFlowStatus_Statuses_StatusId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_WorkFlowTransactions_Statuses_StatusId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_Users_UserRole_RoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_Workflows_Users_ModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_WorkFlowStatus_Workflows_WorkFlowId" ManuallyRouted="false" />
+        <AssociationConnector Association="IssueTrackerModel.FK_WorkFlowTransactions_WorkFlowStatus_WorkFlowMapperId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
